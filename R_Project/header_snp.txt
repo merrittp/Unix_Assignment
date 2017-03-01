@@ -1,0 +1,2 @@
+SNP_ID	cdv_marker_id	Chromosome	Position	alt_pos	mult_positions	amplicon	cdv_map_feature.name	gene	candidate/random	Genaissance_daa_id	Sequenom_daa_id	count_amplicons	count_cmf	count_gene
+abph1.20	5976	2	27403404			abph1	AB042260	abph1	candidate	8393	10474	1	1	1
