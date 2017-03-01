@@ -1,6 +1,19 @@
 fang_data <- read.table("fang_et_al_genotypes.txt")
 snp_position <- read.table("snp_position.txt", header = TRUE, fill = TRUE)
 
+#Information Processing
+dim(fang_data)
+dim(snp_position)
+
+typeof(fang_data)
+typeof(snp_position)
+
+class(fang_data)
+class(snp_position)
+
+sum(is.na(fang_data))
+sum(is.na(snp_position))
+
 #Maize Commands
 maize_genotypes <- fang_data[fang_data$V3 %in% c("ZMMIL", "ZMMLR", "ZMMMR", "Group"),]
 
@@ -13,9 +26,6 @@ transposed_maize <- as.data.frame(transposed_maize)
 snp_position <- snp_position[,-2]
 snp_position <- snp_position[,1:3]
 
-#Currently faulty
-#total <- rbind(data frameA, data frameB)
-#do.call(rbind, dpth_summ)
 merged_maize <- merge(snp_position, transposed_maize, by = 1, all.x = F, all.y = F)
 
 list_of_df <- list()
@@ -288,3 +298,58 @@ write.table(teosinte_chr_10_ascending,
 write.table(teosinte_chr_10_descending,
             file="teosinte_chr_10_descending.csv",
             sep=",", quote=FALSE, row.names=FALSE)
+
+#Graphing Attempts.
+maize_chr_1 <- maize_chr_1[,-(1:3)]
+teosinte_chr_1 <- teosinte_chr_1[,-(1:3)]
+snp_count_chr_1 <- (nrow(maize_chr_1)*ncol(maize_chr_1)) + (nrow(teosinte_chr_1)*ncol(teosinte_chr_1))
+
+maize_chr_2 <- maize_chr_2[,-(1:3)]
+teosinte_chr_2 <- teosinte_chr_2[,-(1:3)]
+snp_count_chr_2 <- (nrow(maize_chr_2)*ncol(maize_chr_2)) + (nrow(teosinte_chr_2)*ncol(teosinte_chr_2))
+
+maize_chr_3 <- maize_chr_3[,-(1:3)]
+teosinte_chr_3 <- teosinte_chr_3[,-(1:3)]
+snp_count_chr_3 <- (nrow(maize_chr_3)*ncol(maize_chr_3)) + (nrow(teosinte_chr_3)*ncol(teosinte_chr_3))
+
+maize_chr_4 <- maize_chr_4[,-(1:3)]
+teosinte_chr_4 <- teosinte_chr_4[,-(1:3)]
+snp_count_chr_4 <- (nrow(maize_chr_4)*ncol(maize_chr_4)) + (nrow(teosinte_chr_4)*ncol(teosinte_chr_4))
+
+maize_chr_5 <- maize_chr_5[,-(1:3)]
+teosinte_chr_5 <- teosinte_chr_5[,-(1:3)]
+snp_count_chr_5 <- (nrow(maize_chr_5)*ncol(maize_chr_5)) + (nrow(teosinte_chr_5)*ncol(teosinte_chr_5))
+
+maize_chr_6 <- maize_chr_6[,-(1:3)]
+teosinte_chr_6 <- teosinte_chr_6[,-(1:3)]
+snp_count_chr_6 <- (nrow(maize_chr_6)*ncol(maize_chr_6)) + (nrow(teosinte_chr_6)*ncol(teosinte_chr_6))
+
+maize_chr_7 <- maize_chr_7[,-(1:3)]
+teosinte_chr_7 <- teosinte_chr_7[,-(1:3)]
+snp_count_chr_7 <- (nrow(maize_chr_7)*ncol(maize_chr_7)) + (nrow(teosinte_chr_7)*ncol(teosinte_chr_7))
+
+maize_chr_8 <- maize_chr_8[,-(1:3)]
+teosinte_chr_8 <- teosinte_chr_8[,-(1:3)]
+snp_count_chr_8 <- (nrow(maize_chr_8)*ncol(maize_chr_8)) + (nrow(teosinte_chr_8)*ncol(teosinte_chr_8))
+
+maize_chr_9 <- maize_chr_9[,-(1:3)]
+teosinte_chr_9 <- teosinte_chr_9[,-(1:3)]
+snp_count_chr_9 <- (nrow(maize_chr_9)*ncol(maize_chr_9)) + (nrow(teosinte_chr_9)*ncol(teosinte_chr_9))
+
+maize_chr_10 <- maize_chr_10[,-(1:3)]
+teosinte_chr_10 <- teosinte_chr_10[,-(1:3)]
+snp_count_chr_10 <- (nrow(maize_chr_10)*ncol(maize_chr_10)) + (nrow(teosinte_chr_10)*ncol(teosinte_chr_10))
+
+total_snp_count <- append(snp_count_chr_1, snp_count_chr_2)
+total_snp_count <- append(total_snp_count, snp_count_chr_3)
+total_snp_count <- append(total_snp_count, snp_count_chr_4)
+total_snp_count <- append(total_snp_count, snp_count_chr_5)
+total_snp_count <- append(total_snp_count, snp_count_chr_6)
+total_snp_count <- append(total_snp_count, snp_count_chr_7)
+total_snp_count <- append(total_snp_count, snp_count_chr_8)
+total_snp_count <- append(total_snp_count, snp_count_chr_9)
+total_snp_count <- append(total_snp_count, snp_count_chr_10)
+
+total_snp_count <- as.data.frame(total_snp_count)
+total_snp_count$chromosome <- c(1:10)
+ggplot(total_snp_count, aes(chromosome, total_snp_count, fill=as.factor(chromosome))) + geom_bar(stat="identity")
